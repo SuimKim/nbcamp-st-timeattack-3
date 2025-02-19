@@ -1,24 +1,25 @@
 import styled from "styled-components";
 import Form from "../components/Form";
 import List from "../components/List";
-import { useState } from "react";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
 
 const MainPage = () => {
-  const [todo, setTodo] = useState([]);
-
   return (
-    <StContainer>
-      <StHeader>
-        <h1>내일배움캠프 스탠다드반 투두리스트</h1>
-      </StHeader>
-      <StMain>
-        <Form todo={todo} setTodo={setTodo} />
-        <List todo={todo} setTodo={setTodo} />
-      </StMain>
-      <StFooter>
-        <p>Copyright 2025 스파르타 내일배움캠프</p>
-      </StFooter>
-    </StContainer>
+    <Provider store={store}>
+      <StContainer>
+        <StHeader>
+          <h1>내일배움캠프 스탠다드반 투두리스트</h1>
+        </StHeader>
+        <StMain>
+          <Form />
+          <List />
+        </StMain>
+        <StFooter>
+          <p>Copyright 2025 스파르타 내일배움캠프</p>
+        </StFooter>
+      </StContainer>
+    </Provider>
   );
 };
 

@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setTodo } from "../redux/todoSlice";
 
-const Form = ({ todo, setTodo }) => {
+const Form = () => {
   const [titleValue, setTitleValue] = useState("");
   const [contentValue, setContentValue] = useState("");
+
+  const todo = useSelector((a) => a.todoSlice);
+  const dispatch = useDispatch();
 
   const handleAddTodo = (e) => {
     e.preventDefault();
@@ -15,7 +20,7 @@ const Form = ({ todo, setTodo }) => {
       isDone: false,
     };
 
-    setTodo([...todo, newTodo]);
+    dispatch(setTodo([...todo, newTodo]));
     setTitleValue("");
     setContentValue("");
   };

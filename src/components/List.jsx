@@ -1,7 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { setTodo } from "../redux/todoSlice";
 
-const List = ({ todo, setTodo }) => {
+const List = () => {
+  const todo = useSelector((a) => a.todoSlice);
+  const dispatch = useDispatch();
+
   const handleDone = (id) => {
     // TODO: 완료 처리, 토글링
     const selectedTodo = todo.find((item) => item.id === id);
@@ -14,19 +19,19 @@ const List = ({ todo, setTodo }) => {
       return item.id === id ? selectedTodo : item;
     });
 
-    setTodo(updatedList);
+    dispatch(setTodo(updatedList));
   };
 
   const handleDelete = (id) => {
     // TODO: 삭제 처리
     const deletedList = todo.filter((item) => item.id !== id);
 
-    setTodo(deletedList);
+    dispatch(setTodo(deletedList));
   };
 
   return (
     <StyledList>
-      {todo.map((item) => (
+      {todo?.map((item) => (
         <StyledListItem key={item.id}>
           <Link to={`/detail/${item.id}`} state={item}>
             <StyledTitle>{item.title}</StyledTitle>
