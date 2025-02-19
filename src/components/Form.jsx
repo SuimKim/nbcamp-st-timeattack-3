@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const Form = () => {
+const Form = ({ todo, setTodo }) => {
+  const [titleValue, setTitleValue] = useState("");
+  const [contentValue, setContentValue] = useState("");
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+
+    const newTodo = {
+      id: new Date().getTime(),
+      title: titleValue,
+      content: contentValue,
+      isDone: false,
+    };
+
+    setTodo([...todo, newTodo]);
+    setTitleValue("");
+    setContentValue("");
+  };
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={handleAddTodo}>
       <StyledInput
         type="text"
         name="title"
+        value={titleValue}
+        onChange={(e) => setTitleValue(e.target.value)}
         placeholder="할 일 제목을 입력하세요"
       />
       <StyledInput
         type="text"
         name="content"
+        value={contentValue}
+        onChange={(e) => setContentValue(e.target.value)}
         placeholder="할 일 내용을 입력하세요"
       />
       <StyledButton type="submit">추가</StyledButton>
