@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-const TodoContext = createContext();
+export const TodoContext = createContext();
 
-const TodoProvider = ({ children }) => {
-  const [todo, setTodo] = useState([]);
+export const TodoProvider = ({ children }) => {
+  const [todo, setTodo] = useState([{ id: 1 }]);
 
   return (
     <TodoContext.Provider value={(todo, setTodo)}>

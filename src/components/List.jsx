@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { TodoContext } from "../contexts/TodoContext";
 
-const List = ({ todo, setTodo }) => {
+const List = () => {
+  const { todo, setTodo } = useContext(TodoContext);
+
   const handleDone = (id) => {
     // TODO: 완료 처리, 토글링
     const selectedTodo = todo.find((item) => item.id === id);
@@ -25,11 +30,13 @@ const List = ({ todo, setTodo }) => {
 
   return (
     <StyledList>
-      {todo.map((item) => (
+      {todo?.map((item) => (
         <StyledListItem key={item.id}>
-          <StyledTitle>{item.title}</StyledTitle>
-          <StyledContent>{item.content}</StyledContent>
-          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+          <Link to={`/detail/${item.id}`} state={item}>
+            <StyledTitle>{item.title}</StyledTitle>
+            <StyledContent>{item.content}</StyledContent>
+            <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+          </Link>
           <StyledButton onClick={() => handleDone(item.id)}>
             {item.isDone ? "취소" : "완료"}
           </StyledButton>
