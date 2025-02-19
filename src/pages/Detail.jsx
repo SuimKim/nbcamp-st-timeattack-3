@@ -1,13 +1,21 @@
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 const DetailPage = () => {
+  const location = useLocation();
+  const selectedTodo = location.state;
+
   return (
     <StyledContainer>
       <StyledTitle>할 일 상세 페이지</StyledTitle>
-      <StyledText>할일 제목 : </StyledText>
-      <StyledText>할일 내용 : </StyledText>
-      <StyledText>할일 완료 여부 : </StyledText>
-      <StyledButton>메인 페이지로 돌아가기</StyledButton>
+      <StyledText>할일 제목 :{selectedTodo.title}</StyledText>
+      <StyledText>할일 내용 : {selectedTodo.content}</StyledText>
+      <StyledText>
+        할일 완료 여부 : {selectedTodo.isDone ? "완료" : "미완료"}
+      </StyledText>
+      <Link to="/">
+        <StyledButton>메인 페이지로 돌아가기</StyledButton>
+      </Link>
     </StyledContainer>
   );
 };

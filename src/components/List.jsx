@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const List = ({ todo, setTodo }) => {
@@ -27,9 +28,11 @@ const List = ({ todo, setTodo }) => {
     <StyledList>
       {todo.map((item) => (
         <StyledListItem key={item.id}>
-          <StyledTitle>{item.title}</StyledTitle>
-          <StyledContent>{item.content}</StyledContent>
-          <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+          <Link to={`/detail/${item.id}`} state={item}>
+            <StyledTitle>{item.title}</StyledTitle>
+            <StyledContent>{item.content}</StyledContent>
+            <StyledStatus>{item.isDone ? "완료" : "미완료"}</StyledStatus>
+          </Link>
           <StyledButton onClick={() => handleDone(item.id)}>
             {item.isDone ? "취소" : "완료"}
           </StyledButton>
